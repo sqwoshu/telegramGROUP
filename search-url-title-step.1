@@ -1,0 +1,46 @@
+from bs4 import BeautifulSoup
+from itertools import *
+import requests
+
+# https://t.me/
+
+
+nud = []
+k = 0
+for x in permutations('qazxswedcvfrtgbnhyujmkiolp',5):
+    s  = ''.join(x)
+    nud.append(s)
+    k+=1
+print(k)
+
+def tgsoeazy():
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'
+    }
+    count = 0
+    titles = []
+
+    while count < k:
+        url = 'https://t.me/'+ nud[0]
+        res = requests.get(url, headers=headers)
+        soup = BeautifulSoup(res.text, 'lxml')
+
+        try:
+            info = soup.find('div',class_='tgme_page_title').get_text(strip=True)
+            if info:
+                titles.append(info)
+                print(url,''.join(titles))
+                count+=1
+                del nud[0]
+                titles.clear()
+            else:
+                del nud[0]
+                count+=1
+                titles.clear()
+        except Exception:
+            del nud[0]
+            count += 1
+            titles.clear()
+
+
+tgsoeazy()
