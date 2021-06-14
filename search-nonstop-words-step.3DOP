@@ -12,7 +12,7 @@ def generator(povtor):
         s  = ''.join(x)
         nud.append(s)
         k+=1
-    print(k)
+
     tgsoeazy(nud,k,povtor)
 
 def tgsoeazy(nud,k,povtor):
