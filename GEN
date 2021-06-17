@@ -1,0 +1,15 @@
+from itertools import *
+s = ''
+a = 0
+b = 3
+k = 0
+count = 0
+for i in permutations('qazxswedcvfrtgbnhyujmkiolp',6):
+    s += ''.join(i)
+    k+=1
+while count != k:
+    num = s[a:b]
+    print(num)
+    count+=1
+    a+=3
+    b+=3
