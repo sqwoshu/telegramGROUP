@@ -4,17 +4,18 @@ import requests
 import math
 
 # https://t.me/
-povtor = 1
+povtor = 6
 
 def generator(povtor):
+    pos = 'qwertyuioplkjhgfdsazxcvbnm'
     count_s = 1
-    leen = [26]
+    leen = [len(pos)]
     for i in range(1,povtor):
         leen.append(leen[0]-i)
     prouz = math.prod(leen)
     print(prouz)
 
-    for x in permutations('qwertyuioplkjhgfdsazxcvbnm',povtor):
+    for x in permutations(pos,povtor):
         s = ''.join(x)
         if prouz == count_s:
             povtor+=1
@@ -30,12 +31,9 @@ def pars(s):
     url = 'https://t.me/' + s
     res = requests.get(url, headers=headers)
     soup = BeautifulSoup(res.text, 'lxml')
-
     try:
         info = soup.find('div', class_='tgme_page_title').get_text(strip=True)
         print(url,info)
-        #file = open("url.txt", "a")
-        #file.write(url + ' ' + info + '\n')
     except  Exception:
         return True
 
